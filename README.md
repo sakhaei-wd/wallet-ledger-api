@@ -80,7 +80,7 @@ docker compose exec web python manage.py createsuperuser
 docker compose exec web pytest
 ```
 
-Transfer suite will include a concurrency test (Phase 2).
+Transfer suite includes idempotency and concurrency tests (including opposing A↔B transfers).
 
 ## Project docs
 

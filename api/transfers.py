@@ -10,14 +10,11 @@ from rest_framework.views import APIView
 
 from apps.transactions.models import Transaction
 from apps.wallets.models import MONEY_DECIMAL_PLACES, MONEY_MAX_DIGITS, Currency
-from services.transfers import (
-    InsufficientFunds,
-    TransferError,
-    TransferValidationError,
-    create_transfer,
-)
+from services.transfers import execute_transfer_request
 
 User = get_user_model()
+
+IDEMPOTENCY_HEADER = "Idempotency-Key"
 
 
 class TransferCreateSerializer(serializers.Serializer):
@@ -66,26 +63,12 @@ class TransferCreateView(APIView):
         )
         serializer.is_valid(raise_exception=True)
 
-        try:
-            transaction = create_transfer(
-                sender=request.user,
-                to_user_id=serializer.validated_data["to_user_id"],
-                amount=serializer.validated_data["amount"],
-                currency=serializer.validated_data["currency"],
-            )
-        except NotImplementedError:
-            return Response(
-                {"detail": "Transfer service not implemented yet (P2-02)."},
-                status=status.HTTP_501_NOT_IMPLEMENTED,
-            )
-        except InsufficientFunds as exc:
-            return Response({"detail": str(exc)}, status=status.HTTP_400_BAD_REQUEST)
-        except TransferValidationError as exc:
-            return Response({"detail": str(exc)}, status=status.HTTP_400_BAD_REQUEST)
-        except TransferError as exc:
-            return Response({"detail": str(exc)}, status=status.HTTP_400_BAD_REQUEST)
-
-        return Response(
-            TransferResponseSerializer(transaction).data,
-            status=status.HTTP_201_CREATED,
+        result = execute_transfer_request(
+            sender=request.user,
+            to_user_id=serializer.validated_data["to_user_id"],
+            amount=serializer.validated_data["amount"],
+            currency=serializer.validated_data["currency"],
+            idempotency_key=request.headers.get(IDEMPOTENCY_HEADER),
+            request_path=request.path,
         )
+        return Response(result.body, status=result.status_code)

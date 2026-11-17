@@ -74,7 +74,8 @@ Domain boundaries:
 
 ## Conventions
 
-- **One task at a time**: implement only the task id the user named (e.g. `do P1-02`). Stop after that task. Do not start the next unless asked.
+- **One task at a time**: implement only the task id the user named (e.g. `do P2-03`). Stop after that task. Do not start the next unless asked.
+- **Larger remaining slices**: from P2-03 onward, backlog items are batched (feature + hardening + tests in one id) to keep commits meaningful. Still do **only** the named id.
 - **Backlog**: after each task, update `docs/BACKLOG.md` checkboxes to match reality.
 - **Suggested commit**: after each completed task, end the summary with a single copyable commit message (message text only, in a fenced code block). Do not run `git commit` unless the user explicitly asks.
 - **Commits / remotes**: commit, push, or create GitHub repos **only** when the user explicitly asks.
@@ -82,7 +83,7 @@ Domain boundaries:
 - **Diffs**: keep changes focused; no drive-by refactors.
 - **Secrets**: env-based config only; never commit secrets (see P1-04).
 - **Services over fat views**: business rules belong in service modules.
-- **Tests**: first-class; transfer concurrency coverage is required (P2-05).
+- **Tests**: first-class; transfer concurrency coverage is required (included in **P2-03**).
 
 ## Ask before scope
 
@@ -133,4 +134,4 @@ Transfer suite must include at least one **concurrency** test (simultaneous tran
 4. End with a **Suggested commit** (copyable message only).
 5. **Stop** and wait for the next task id.
 
-Do not implement a whole phase in one turn.
+Do not start the next backlog id unless the user asks. Remaining ids are intentionally larger (often a full feature vertical).

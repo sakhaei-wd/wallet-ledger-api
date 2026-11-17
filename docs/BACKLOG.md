@@ -2,6 +2,8 @@
 
 Phased task list for the Wallet & Transaction Service. Work **one task id at a time**. Mark items `[x]` only when that task is done.
 
+> **Grain note:** Phase 1 + early Phase 2 used fine-grained tasks. Remaining work is **batched** into larger slices so each turn/commit is more substantial. Older IDs that were merged are listed under each new task for traceability.
+
 ## Phase 1 — Foundation
 
 - [x] **P1-01**: Create `docs/BACKLOG.md` + `AGENTS.md` (architecture map, conventions, how to run/test, ask-before-scope)
@@ -15,30 +17,24 @@ Phased task list for the Wallet & Transaction Service. Work **one task id at a t
 ## Phase 2 — Transfers
 
 - [x] **P2-01**: Transfer serializers / views / URLs (`POST /api/transfers/`)
-- [ ] **P2-02**: Transfer service (locking, no negative balances, exactly 2 ledger entries)
-- [ ] **P2-03**: `Idempotency-Key` handling
-- [ ] **P2-04**: Deadlock-safe lock ordering (A→B and B→A)
-- [ ] **P2-05**: Pytest for transfers, including at least one concurrency test
+- [x] **P2-02**: Transfer service (locking, no negative balances, exactly 2 ledger entries)
+- [x] **P2-03**: Finish transfers — `Idempotency-Key`, confirm deadlock-safe lock ordering (A↔B), pytest suite including at least one concurrency test  
+  _(merges former P2-03 + P2-04 + P2-05; lock ordering already started in P2-02 — verify/cover in tests)_
 
 ## Phase 3 — Deposit webhook
 
-- [ ] **P3-01**: HMAC-SHA256 request signature verification
-- [ ] **P3-02**: Idempotent deposit processing by external event/transaction id
-- [ ] **P3-03**: Enforce status transitions `PENDING → DONE|FAILED`; final states immutable
-- [ ] **P3-04**: Pytest for signature, duplicates, illegal transitions, out-of-order delivery
+- [ ] **P3-01**: Deposit webhook end-to-end — HMAC-SHA256 verification, idempotent processing by external id, `PENDING → DONE|FAILED` (finals immutable), pytest (signature, duplicates, illegal transitions, out-of-order)  
+  _(merges former P3-01 … P3-04)_
 
 ## Phase 4 — Withdrawals (bonus)
 
-- [ ] **P4-01**: Withdrawal API + move funds available → locked
-- [ ] **P4-02**: Celery task + mock gateway client + exponential backoff retries
-- [ ] **P4-03**: Success/failure settlement + ledger entries
-- [ ] **P4-04**: Task re-execution idempotency (no double processing)
-- [ ] **P4-05**: Pytest for lock/unlock/success/failure/idempotent retry
+- [ ] **P4-01**: Withdrawals end-to-end — API (available→locked), Celery mock gateway with exponential backoff, success/failure settlement + ledger, task re-execution idempotency, pytest  
+  _(merges former P4-01 … P4-05)_
 
 ## Phase 5 — Delivery
 
-- [ ] **P5-01**: README design decisions, trade-offs, future improvements
-- [ ] **P5-02**: Final backlog pass + smoke check
+- [ ] **P5-01**: Delivery wrap-up — README design decisions/trade-offs/future work, final backlog pass, smoke check (`docker compose up`, pytest)  
+  _(merges former P5-01 + P5-02)_
 
 ## Deliverables checklist
 
