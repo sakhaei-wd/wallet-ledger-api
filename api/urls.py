@@ -3,10 +3,11 @@
 from django.urls import path
 from rest_framework.authtoken.views import obtain_auth_token
 
+from api.transfers import TransferCreateView
+
 urlpatterns = [
-    # Obtain a DRF auth token: POST {"username": "...", "password": "..."}
     path("auth/token/", obtain_auth_token, name="api-token-auth"),
-    # path("transfers/", ...),         # P2
+    path("transfers/", TransferCreateView.as_view(), name="api-transfers"),
     # path("webhooks/deposit/", ...),  # P3
     # path("withdrawals/", ...),       # P4
 ]

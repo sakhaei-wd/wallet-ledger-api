@@ -14,7 +14,7 @@ Phased task list for the Wallet & Transaction Service. Work **one task id at a t
 
 ## Phase 2 — Transfers
 
-- [ ] **P2-01**: Transfer serializers / views / URLs (`POST /api/transfers/`)
+- [x] **P2-01**: Transfer serializers / views / URLs (`POST /api/transfers/`)
 - [ ] **P2-02**: Transfer service (locking, no negative balances, exactly 2 ledger entries)
 - [ ] **P2-03**: `Idempotency-Key` handling
 - [ ] **P2-04**: Deadlock-safe lock ordering (A→B and B→A)
