@@ -23,7 +23,8 @@ A Django + DRF backend that maintains per-user, per-currency wallet balances and
 
 **Suggested defaults** (override only if the user says otherwise):
 
-- Auth: DRF `TokenAuthentication`
+- Auth: DRF `TokenAuthentication` (`Authorization: Token <key>`)
+- Token obtain: `POST /api/auth/token/` with `username` + `password`
 - Currencies: `USD`, `EUR`, `BTC` (string codes)
 - Part 3 (withdrawals): implement
 - Layout: single Django project / monorepo
