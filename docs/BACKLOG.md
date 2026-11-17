@@ -7,7 +7,7 @@ Phased task list for the Wallet & Transaction Service. Work **one task id at a t
 - [x] **P1-01**: Create `docs/BACKLOG.md` + `AGENTS.md` (architecture map, conventions, how to run/test, ask-before-scope)
 - [x] **P1-02**: Scaffold Django project + app layout
 - [x] **P1-03**: Docker Compose (web, postgres, redis, celery worker) so `docker compose up` works
-- [ ] **P1-04**: Env-based settings; no secrets committed
+- [x] **P1-04**: Env-based settings; no secrets committed
 - [ ] **P1-05**: Models + migrations (User/auth, Wallet, Transaction, LedgerEntry)
 - [ ] **P1-06**: API auth setup (DRF Token unless overridden)
 - [ ] **P1-07**: README skeleton (fill deeper design notes in P5-01)

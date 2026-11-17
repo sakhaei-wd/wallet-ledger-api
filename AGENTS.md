@@ -104,7 +104,14 @@ docker compose up --build
 
 Expected services: web (Django), postgres, redis, celery worker.
 
-Env vars live in `.env` (gitignored) with `.env.example` committed as a template (P1-04).
+Env vars live in `.env` (gitignored) with `.env.example` committed as a template.
+
+```bash
+cp .env.example .env   # then edit secrets
+docker compose up --build
+```
+
+`DJANGO_SECRET_KEY` and DB credentials must come from the environment — never commit `.env`.
 
 ## How to test (target — after test scaffolding)
 
