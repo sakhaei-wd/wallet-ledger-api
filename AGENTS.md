@@ -34,7 +34,7 @@ A Django + DRF backend that maintains per-user, per-currency wallet balances and
 ```
 manage.py
 requirements.txt
-fxpay/                    # Django project package (settings, urls, wsgi/asgi; celery later)
+fxpay/                    # Django project package (settings, urls, wsgi/asgi, celery)
 apps/
   wallets/                # Wallet model + balance invariants
   ledger/                 # LedgerEntry (append-only)
