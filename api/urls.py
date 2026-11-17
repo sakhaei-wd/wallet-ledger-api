@@ -7,6 +7,7 @@ from drf_spectacular.views import (
     SpectacularRedocView,
     SpectacularSwaggerView,
 )
+from rest_framework import serializers
 from rest_framework.authtoken.views import ObtainAuthToken
 from rest_framework.permissions import AllowAny
 
@@ -20,12 +21,23 @@ _schema_kwargs = {
 }
 
 
+class TokenObtainRequestSerializer(serializers.Serializer):
+    username = serializers.CharField()
+    password = serializers.CharField(style={"input_type": "password"})
+
+
+class TokenObtainResponseSerializer(serializers.Serializer):
+    token = serializers.CharField()
+
+
 @extend_schema_view(
     post=extend_schema(
         tags=["auth"],
         summary="Obtain API token",
         description="Exchange username/password for a DRF auth token.",
         auth=[],
+        request=TokenObtainRequestSerializer,
+        responses={200: TokenObtainResponseSerializer},
     )
 )
 class TokenObtainView(ObtainAuthToken):
