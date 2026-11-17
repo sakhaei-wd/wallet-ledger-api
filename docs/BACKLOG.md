@@ -23,7 +23,7 @@ Phased task list for the Wallet & Transaction Service. Work **one task id at a t
 
 ## Phase 3 — Deposit webhook
 
-- [ ] **P3-01**: Deposit webhook end-to-end — HMAC-SHA256 verification, idempotent processing by external id, `PENDING → DONE|FAILED` (finals immutable), pytest (signature, duplicates, illegal transitions, out-of-order)  
+- [x] **P3-01**: Deposit webhook end-to-end — HMAC-SHA256 verification, idempotent processing by external id, `PENDING → DONE|FAILED` (finals immutable), pytest (signature, duplicates, illegal transitions, out-of-order)  
   _(merges former P3-01 … P3-04)_
 
 ## Phase 4 — Withdrawals (bonus)
