@@ -89,7 +89,6 @@ Domain boundaries:
 
 Before adding anything **not** in the implementation brief, **ask the user**. Examples that need a yes:
 
-- OpenAPI / Swagger UI
 - Django admin customization beyond what’s needed to develop
 - FX / currency conversion
 - Web UI or dashboards

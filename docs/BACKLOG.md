@@ -2,7 +2,7 @@
 
 Phased task list for the Wallet & Transaction Service. Work **one task id at a time**. Mark items `[x]` only when that task is done.
 
-> **Grain note:** Phase 1 + early Phase 2 used fine-grained tasks. Remaining work is **batched** into larger slices so each turn/commit is more substantial. Older IDs that were merged are listed under each new task for traceability.
+> **Grain note:** Phase 1 + early Phase 2 used fine-grained tasks. Remaining work was **batched** into larger slices so each turn/commit stayed meaningful. Older IDs that were merged are listed under each new task for traceability.
 
 ## Phase 1 — Foundation
 
@@ -33,14 +33,16 @@ Phased task list for the Wallet & Transaction Service. Work **one task id at a t
 
 ## Phase 5 — Delivery
 
-- [ ] **P5-01**: Delivery wrap-up — README design decisions/trade-offs/future work, final backlog pass, smoke check (`docker compose up`, pytest)  
+- [x] **P5-01**: Delivery wrap-up — README design decisions/trade-offs/future work, final backlog pass, smoke check (`docker compose up`, pytest)  
   _(merges former P5-01 + P5-02)_
 
 ## Deliverables checklist
 
 - [ ] Git repo with meaningful commit history (when user requests commits)
-- [ ] Entire app runnable via `docker compose up`
-- [ ] pytest suite including Part 1 concurrency test
-- [ ] README with key decisions, trade-offs, future work
-- [ ] Phased backlog + agent docs
-- [ ] Parts 1 & 2 complete; Part 3 complete unless user skips it
+- [x] Entire app runnable via `docker compose up`
+- [x] pytest suite including Part 1 concurrency test
+- [x] README with key decisions, trade-offs, future work
+- [x] Phased backlog + agent docs
+- [x] Parts 1 & 2 complete; Part 3 complete unless user skips it
+  - Part 3 (withdrawals) also complete
+- [x] OpenAPI / Swagger UI (`drf-spectacular` at `/api/docs/`) — added on request after P5

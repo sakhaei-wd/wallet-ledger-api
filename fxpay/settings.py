@@ -52,6 +52,7 @@ INSTALLED_APPS = [
     # Third-party
     "rest_framework",
     "rest_framework.authtoken",
+    "drf_spectacular",
     # Domain apps
     "apps.wallets",
     "apps.ledger",
@@ -66,6 +67,17 @@ REST_FRAMEWORK = {
     "DEFAULT_PERMISSION_CLASSES": [
         "rest_framework.permissions.IsAuthenticated",
     ],
+    "DEFAULT_SCHEMA_CLASS": "drf_spectacular.openapi.AutoSchema",
+}
+
+SPECTACULAR_SETTINGS = {
+    "TITLE": "FXPay Wallet & Transaction API",
+    "DESCRIPTION": (
+        "Internal transfers, HMAC deposit webhooks, and withdrawals. "
+        "Authenticate with `Authorization: Token <key>` from POST /api/auth/token/."
+    ),
+    "VERSION": "1.0.0",
+    "SERVE_INCLUDE_SCHEMA": False,
 }
 
 MIDDLEWARE = [

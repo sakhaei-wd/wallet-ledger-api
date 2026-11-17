@@ -3,6 +3,7 @@
 from decimal import Decimal
 
 from django.contrib.auth import get_user_model
+from drf_spectacular.utils import OpenApiParameter, OpenApiResponse, extend_schema
 from rest_framework import serializers, status
 from rest_framework.request import Request
 from rest_framework.response import Response
@@ -56,6 +57,28 @@ class TransferResponseSerializer(serializers.ModelSerializer):
 class TransferCreateView(APIView):
     """Create an internal transfer from the authenticated user to another user."""
 
+    @extend_schema(
+        tags=["transfers"],
+        summary="Create internal transfer",
+        description=(
+            "Debit the authenticated user's wallet and credit another user "
+            "in the same currency. Pass `Idempotency-Key` to safely retry."
+        ),
+        request=TransferCreateSerializer,
+        responses={
+            201: TransferResponseSerializer,
+            400: OpenApiResponse(description="Validation or insufficient funds"),
+        },
+        parameters=[
+            OpenApiParameter(
+                name=IDEMPOTENCY_HEADER,
+                type=str,
+                location=OpenApiParameter.HEADER,
+                required=False,
+                description="Client-supplied key; identical retries return the stored response.",
+            ),
+        ],
+    )
     def post(self, request: Request) -> Response:
         serializer = TransferCreateSerializer(
             data=request.data,

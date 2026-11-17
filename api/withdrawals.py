@@ -2,6 +2,7 @@
 
 from decimal import Decimal
 
+from drf_spectacular.utils import OpenApiResponse, extend_schema
 from rest_framework import serializers, status
 from rest_framework.request import Request
 from rest_framework.response import Response
@@ -27,9 +28,33 @@ class WithdrawalCreateSerializer(serializers.Serializer):
     currency = serializers.ChoiceField(choices=Currency.choices)
 
 
+class WithdrawalResponseSerializer(serializers.Serializer):
+    id = serializers.IntegerField()
+    type = serializers.CharField()
+    status = serializers.CharField()
+    amount = serializers.CharField(help_text="Decimal string")
+    currency = serializers.ChoiceField(choices=Currency.choices)
+    from_wallet_id = serializers.IntegerField()
+    failure_reason = serializers.CharField(allow_blank=True)
+    created_at = serializers.CharField(help_text="ISO-8601 timestamp")
+
+
 class WithdrawalCreateView(APIView):
     """Lock funds and enqueue gateway settlement for a withdrawal."""
 
+    @extend_schema(
+        tags=["withdrawals"],
+        summary="Request withdrawal",
+        description=(
+            "Locks `amount` from available balance and enqueues a Celery mock "
+            "gateway job that settles (DONE) or unlocks (FAILED)."
+        ),
+        request=WithdrawalCreateSerializer,
+        responses={
+            201: WithdrawalResponseSerializer,
+            400: OpenApiResponse(description="Validation or insufficient funds"),
+        },
+    )
     def post(self, request: Request) -> Response:
         serializer = WithdrawalCreateSerializer(data=request.data)
         serializer.is_valid(raise_exception=True)
