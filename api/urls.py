@@ -5,6 +5,7 @@ from rest_framework.authtoken.views import obtain_auth_token
 
 from api.transfers import TransferCreateView
 from api.webhooks import DepositWebhookView
+from api.withdrawals import WithdrawalCreateView
 
 urlpatterns = [
     path("auth/token/", obtain_auth_token, name="api-token-auth"),
@@ -14,5 +15,5 @@ urlpatterns = [
         DepositWebhookView.as_view(),
         name="api-webhooks-deposit",
     ),
-    # path("withdrawals/", ...),  # P4
+    path("withdrawals/", WithdrawalCreateView.as_view(), name="api-withdrawals"),
 ]

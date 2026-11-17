@@ -72,7 +72,7 @@ docker compose exec web python manage.py createsuperuser
 | `POST /api/auth/token/` | 1 | Token obtain |
 | `POST /api/transfers/` | 2 | Internal transfer + `Idempotency-Key` |
 | `POST /api/webhooks/deposit/` | 3 | HMAC-SHA256 (`X-Signature`) deposit events by `external_id` |
-| `POST /api/withdrawals/` | 4 | Lock → gateway → settle/unlock |
+| `POST /api/withdrawals/` | 4 | Lock available→locked; Celery mock gateway; settle/unlock |
 
 ## Tests
 

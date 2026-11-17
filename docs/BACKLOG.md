@@ -28,7 +28,7 @@ Phased task list for the Wallet & Transaction Service. Work **one task id at a t
 
 ## Phase 4 — Withdrawals (bonus)
 
-- [ ] **P4-01**: Withdrawals end-to-end — API (available→locked), Celery mock gateway with exponential backoff, success/failure settlement + ledger, task re-execution idempotency, pytest  
+- [x] **P4-01**: Withdrawals end-to-end — API (available→locked), Celery mock gateway with exponential backoff, success/failure settlement + ledger, task re-execution idempotency, pytest  
   _(merges former P4-01 … P4-05)_
 
 ## Phase 5 — Delivery
